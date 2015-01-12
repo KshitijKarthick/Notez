@@ -1,0 +1,43 @@
+<!--
+ Copyright (c) 2014 jnaapti - All rights reserved
+ This code is distributed under the MIT license
+ http://jnaapti.com/ 
+-->
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/paper-shadow/paper-shadow.html">
+<polymer-element name="j-card">
+  <template>
+    <style>
+    :host {
+      display: block;
+    }
+    paper-shadow {
+      padding: 20px;
+      margin: 5px;
+    }
+    #header {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    #body {
+
+    }
+    </style>
+    <paper-shadow z="1">
+    <div id="header">
+      <content select="j-card-title"></content>
+    </div>
+    <div id="body">
+      <content select="j-card-body"></content>
+    </div>
+    </paper-shadow>
+  </template>
+  <script>
+  Polymer();
+  </script>
+</polymer-element>
+<j-card>
+  <j-card-title>Hello</j-card-title>
+  <j-card-body>Hello World</j-card-body>
+</j-card>

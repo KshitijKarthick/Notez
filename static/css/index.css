@@ -1,0 +1,17 @@
+body {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+#main-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+  
+#content {
+  flex: 1;
+  overflow: auto;
+}
+
