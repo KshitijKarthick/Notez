@@ -31,9 +31,15 @@
       <paper-shadow class="tab" data-toggle="modal" data-target="#createNote">
         <paper-item>Create Note</paper-item>
       </paper-shadow>
-      <paper-shadow class="tab" ><paper-item>Create Events</paper-item></paper-shadow>
-      <paper-shadow class="tab" ><paper-item>Create Reminders</paper-item></paper-shadow>
-      <paper-shadow class="tab" ><paper-item>Create Archive</paper-item></paper-shadow>
+      <paper-shadow class="tab" data-toggle="modal" data-target="#missingFunctionality">
+        <paper-item>Create Events</paper-item>
+      </paper-shadow>
+      <paper-shadow class="tab" data-toggle="modal" data-target="#missingFunctionality">
+        <paper-item>Create Reminders</paper-item>
+      </paper-shadow>
+      <paper-shadow class="tab" data-toggle="modal" data-target="#missingFunctionality">
+        <paper-item>Create Archive</paper-item>
+      </paper-shadow>
 
       <!-- For Debugging to see all the Data Stored in the IndexedDb Storage -->
       <div id="hide">
@@ -74,6 +80,32 @@
         </div>
         <div class="modal-footer">
           <a href="#" class="myModal btn btn-primary" onclick="note();">Submit</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Window Functionality Absent-->
+  <div class="modal fade" id="missingFunctionality" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <a href="#" class="close" data-dismiss="modal">&times;</a>
+          <center><h3>Missing Functionality</h3></center>
+        </div>
+        <div class="modal-body">
+          <div class="divDialogElements">
+            <!-- <center><input class="xlarge" id="titleInput" name="xlInput" type="text" /></center> -->
+          </div>
+          <section>
+            <center>
+              <h3>Contribute or Wait for us to Implement the Features :P</h3>
+              <!-- <textarea rows="5" cols="60" id="bodyInput"></textarea> -->
+            </center>
+          </section>
+        </div>
+        <div class="modal-footer">
+          <!-- <a href="#" class="myModal btn btn-primary" onclick="note();">Submit</a> -->
         </div>
       </div>
     </div>
