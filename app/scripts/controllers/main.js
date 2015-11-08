@@ -51,6 +51,7 @@ angular.module('notezApp')
                     'timestamp': currentTime,
                     'id': hashCode(this.title + currentTime)
                 });
+                this.alert("Created " + this.title + " successfully");
                 this.title = "";
                 this.content = "";
             };
@@ -73,4 +74,9 @@ angular.module('notezApp')
             	}.bind(this), 3000);
             };
         }
-    ]);
+    ])
+    .controller("HeaderController", function($scope, $location){ 
+        $scope.isActive = function (viewLocation) { 
+            return viewLocation === $location.path();
+        };
+    });

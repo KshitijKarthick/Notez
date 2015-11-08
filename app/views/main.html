@@ -1,6 +1,6 @@
-<div ng-controller="NotesController as notes" class="container-fluid">
-  <div class="row">
-    <div class="col-md-3 col-xs-6 col-sm-6 col-md-offset-1 panel panel-default" ng-repeat="note in notes.notesList">
+<div ng-controller="NotesController as notes" class="container">
+  <div class="row well notes-container">
+    <div class="col-md-3 col-xs-12 col-sm-6 col-md-offset-1 panel panel-default note" ng-repeat="note in notes.notesList">
       <div class="panel-body">
         <h4>
           {{note.title}}
@@ -13,6 +13,9 @@
     </div>
   </div>
   <div class="alert alert-info" ng-show="notes.showAlert" role="alert">{{notes.alertMessage}}</div>
+    <button type="button" class="btn" data-toggle="modal" data-target="#myModal">
+  Create a Note
+</button>
   <div class="modal fade" id="myModal">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -44,7 +47,4 @@
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
   <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-  Create a Note
-</button>
 </div>
