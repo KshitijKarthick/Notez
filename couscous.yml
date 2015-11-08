@@ -1,0 +1,27 @@
+# Base URL of the published website
+baseUrl: http://KshitijKarthick.github.io/Notez
+
+template:
+    url: https://github.com/CouscousPHP/Template-Dark
+
+github:
+    user: KshitijKarthick
+    repo: Notez
+
+title: Notez
+subTitle: Notes Taking Web Application
+
+# The left menu bar
+currentMenu: home
+menu:
+    sections:
+        main:
+            name: Notez
+            items:
+                home:
+                    text: Documentation
+                    # You can use relative urls
+                    relativeUrl: #
+                Kshitij Karthick:
+                    text: KshitijKarthick
+                    absoluteUrl: https://github.com/KshitijKarthick
