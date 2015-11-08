@@ -9,21 +9,27 @@
 * Simple UI.
 * Create Notes.
 * Delete Notes.
-* Stores Notes on Local System.
-* Compliant with all Operating Systems with Support for Web Browser and python2.
+* Stores Notes on Local System using IndexedDB.
+* Compliant with all Operating Systems with Support for Web Browser.
 * Runs With Complete Offline Capabilities.
 
 ## Program Details :
 * The Application runs Completely Offline on the System.
-* The Program is Built using HTML,CSS,JS,JQuery,BootStrap,Polymers,IndexedDb Libraries,Server[Python2].
+* The Program is Built using HTML,CSS,JS,BootStrap,AngularJs,IndexedDb, Grunt, Yeoman.
 * Creation, Deletion of Notes Functionality Provided.
 * Shows all Previously Created Notes stored locally on the System once the Server is Executed.
 
 ## Execution :
 ```
   > cd Notez
-  > python2 -m SimpleHTTPServer
-  > Open the Browser at localhost:8000
+  > npm install
+  > bower install
+  > # Development Mode
+  > grunt serve
+  > # Distribution Mode
+  > grunt build
+  > cd dist/
+  > open index.html
 ```
 
 ## Working :
