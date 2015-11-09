@@ -20,7 +20,23 @@ body {
 }
 
 .note:hover{
-  color: #B31616;
+  /*color: #B31616;*/
+}
+
+.trash-icon{
+  right: 8px;
+}
+
+.trash-icon:hover{
+  color: red;
+}
+
+.edit-icon:hover{
+  color: blue;
+}
+
+.create-button{
+  margin-bottom: 15px;
 }
 
 /* Responsive: Portrait tablets and up */
