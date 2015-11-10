@@ -8,15 +8,18 @@
  * Controller of the notezApp
  */
 angular.module('notezApp')
-    .controller('NotesController', ['$timeout', 'modal',
-        function($timeout, modal) {
+    .controller('NotesController', ['$timeout', 'modal', '$window',
+        function($timeout, modal, $window) {
+            this.emptySelectedContent = function(){
+                this.selectedNoteContent = '';
+                this.selectedNoteTitle = '';
+            };
             this.showAlert = false;
             this.alertMessage = "";
-            this.selectedNoteTitle = "";
-            this.selectedNoteContent = "";
+            this.emptySelectedContent();
             this.emptyNotes = true;
             this.modal = modal;
-            this.db = new Dexie("notez");
+            this.db = new $window.Dexie("notez");
             this.db.version(1).stores({
                 notez: 'id,title,content,timestamp',
             });
@@ -48,8 +51,7 @@ angular.module('notezApp')
                 this.notesList.push(newNote);
                 this.db.notez.add(newNote);
                 this.alert("Created " + this.selectedNoteTitle + " successfully");
-                this.selectedNoteTitle = "";
-                this.selectedNoteContent = "";
+                this.emptySelectedContent();
             };
             this.removeNote = function(id) {
                 for (var i = 0; i < this.notesList.length; i++) {
@@ -77,8 +79,7 @@ angular.module('notezApp')
                                 this.notesList[i].content = this.selectedNoteContent;
                                 this.notesList[i].timestamp = (new Date()).getTime();
                                 this.db.notez.update(this.notesList[i].id, this.notesList[i]);
-                                this.selectedNoteTitle = "";
-                                this.selectedNoteContent = "";
+                                this.emptySelectedContent();
                             }.bind(this));
                             break;
                         }
@@ -89,7 +90,7 @@ angular.module('notezApp')
                 this.modal.setModalData('Create a Note', 'Create Note', function() {
                     this.addNote();
                 }.bind(this));
-            }
+            };
             this.alert = function(msg) {
                 this.alertMessage = msg;
                 this.showAlert = true;
@@ -99,39 +100,43 @@ angular.module('notezApp')
             };
         }
     ])
-    .factory('modal', function() {
+    .factory('modal', ['$window', function($window) {
         var modalId = '#myModal';
         var modalTitle = "Title";
         var actionButtonTitle = "Do Task";
         var action = function() {
             console.log("Hello User");
-        }
+        };
         var setModalData = function(title, buttonTitle, newAction) {
             modalTitle = title;
             actionButtonTitle = buttonTitle;
             action = newAction;
-            $(modalId).modal('show');
-        }
+            toggleModal();
+        };
         var getModalTitle = function() {
             return modalTitle;
+        };
+        var toggleModal = function(){
+            $window.jQuery(modalId).modal('toggle');
         }
         var getActionButtonTitle = function() {
             return actionButtonTitle;
-        }
+        };
         var getAction = function() {
             return function(){
                 action();
-                $(modalId).modal('hide');
+                toggleModal();
             };
-        }
+        };
         return {
             'getModalTitle': getModalTitle,
             'getActionButtonTitle': getActionButtonTitle,
             'setModalData': setModalData,
             'action': action,
-            'getAction': getAction
+            'getAction': getAction,
+            'toggleModal': toggleModal
         };
-    })
+    }])
     .controller("HeaderController", function($scope, $location) {
         $scope.isActive = function(viewLocation) {
             return viewLocation === $location.path();
@@ -146,7 +151,32 @@ angular.module('notezApp')
             filtered.sort(function(a, b) {
                 return (a[field] > b[field] ? 1 : -1);
             });
-            if (reverse) filtered.reverse();
+            if (reverse){
+                filtered.reverse();
+            }
             return filtered;
+        };
+    })
+    .filter('cut', function () {
+        return function (value, wordwise, max, tail) {
+            if (!value){
+                return '';
+            }
+            max = parseInt(max, 10);
+            if (!max){
+                return value;
+            }
+            if (value.length <= max){
+                return value;
+            }
+            value = value.substr(0, max);
+            if (wordwise) {
+                var lastspace = value.lastIndexOf(' ');
+                if (lastspace !== -1) {
+                    value = value.substr(0, lastspace);
+                }
+            }
+
+            return value + (tail || ' …');
         };
     });

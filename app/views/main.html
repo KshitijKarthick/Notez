@@ -8,11 +8,11 @@
     <div class="col-md-3 col-xs-12 col-sm-6 col-md-offset-1 panel panel-default note" ng-repeat="note in notes.notesList | orderObjectBy:'note.timestamp':true track by note.timestamp">
       <div class="panel-body">
         <h4>
-          <strong>{{note.title}}</strong>
+          <strong>{{note.title| cut:true:15:' ...'}}</strong>
           <span ng-click="notes.editNote({{note.id}})" class="edit-icon pull-right glyphicon glyphicon-pencil" aria-hidden="true"></span>
           <span ng-click="notes.removeNote({{note.id}})" class="trash-icon pull-right glyphicon glyphicon-trash" aria-hidden="true"></span>
         </h4>
-        <p>{{note.content}}</p>
+        <p>{{note.content | cut:true:30:' ...'}}</p>
         <h6> {{note.timestamp | date:'short'}} </h6>
       </div>
       <div class="clearfix visible-xs-block"></div>
@@ -46,7 +46,7 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="notes.emptySelectedContent();notes.modal.toggleModal()">Close</button>
           <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" ng-click="(notes.modal.getAction())()" >{{notes.modal.getActionButtonTitle()}}</button>
         </div>
       </div><!-- /.modal-content -->
