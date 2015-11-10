@@ -1,10 +1,15 @@
 <div class="container">
   <div class="row well notes-container">
+    <div ng-show="notes.emptyNotes">
+      <blockquote>
+        <p class="lead">Hey Human &#128522;</p><p>Seems like you dont have any <strong>Notes</strong> &#x1f61e;</p>
+      </blockquote>
+    </div>
     <div class="col-md-3 col-xs-12 col-sm-6 col-md-offset-1 panel panel-default note" ng-repeat="note in notes.notesList | orderObjectBy:'note.timestamp':true track by note.timestamp">
       <div class="panel-body">
         <h4>
-          {{note.title}}
-          <span ng-click="notes.editNote({{note.id}})" class="edit-icon pull-right glyphicon glyphicon-pencil" aria-hidden="true" data-toggle="modal" data-target="#myModal"></span>
+          <strong>{{note.title}}</strong>
+          <span ng-click="notes.editNote({{note.id}})" class="edit-icon pull-right glyphicon glyphicon-pencil" aria-hidden="true"></span>
           <span ng-click="notes.removeNote({{note.id}})" class="trash-icon pull-right glyphicon glyphicon-trash" aria-hidden="true"></span>
         </h4>
         <p>{{note.content}}</p>
@@ -14,7 +19,7 @@
     </div>
   </div>
   <div class="alert alert-info" ng-show="notes.showAlert" role="alert">{{notes.alertMessage}}</div>
-    <button type="button" class="btn create-button" data-toggle="modal" data-target="#myModal" ng-click="notes.invokeCreationofNote()">
+    <button type="button" class="btn create-button" ng-click="notes.invokeCreationofNote()">
   Create a Note
 </button>
   <div class="modal fade" id="myModal">
@@ -42,7 +47,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" ng-click="(notes.modal.getAction())()" data-dismiss="modal">{{notes.modal.getActionButtonTitle()}}</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" ng-click="(notes.modal.getAction())()" >{{notes.modal.getActionButtonTitle()}}</button>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

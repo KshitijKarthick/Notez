@@ -14,6 +14,7 @@ angular.module('notezApp')
             this.alertMessage = "";
             this.selectedNoteTitle = "";
             this.selectedNoteContent = "";
+            this.emptyNotes = true;
             this.modal = modal;
             this.db = new Dexie("notez");
             this.db.version(1).stores({
@@ -24,6 +25,7 @@ angular.module('notezApp')
             });
             this.notesList = [];
             this.db.notez.each(function(note) {
+                this.emptyNotes = false;
                 $timeout.apply(this.notesList.push(note));
             }.bind(this));
             this.addNote = function() {
@@ -35,6 +37,7 @@ angular.module('notezApp')
                     }
                     return hash;
                 }
+                this.emptyNotes = false;
                 var currentTime = (new Date()).getTime();
                 var newNote = {
                     'title': this.selectedNoteTitle,
@@ -58,6 +61,9 @@ angular.module('notezApp')
                             break;
                         }
                     }
+                }
+                if(this.notesList.length === 0){
+                    this.emptyNotes = true;
                 }
             };
             this.editNote = function(id) {
@@ -94,6 +100,7 @@ angular.module('notezApp')
         }
     ])
     .factory('modal', function() {
+        var modalId = '#myModal';
         var modalTitle = "Title";
         var actionButtonTitle = "Do Task";
         var action = function() {
@@ -103,6 +110,7 @@ angular.module('notezApp')
             modalTitle = title;
             actionButtonTitle = buttonTitle;
             action = newAction;
+            $(modalId).modal('show');
         }
         var getModalTitle = function() {
             return modalTitle;
@@ -111,7 +119,10 @@ angular.module('notezApp')
             return actionButtonTitle;
         }
         var getAction = function() {
-            return action;
+            return function(){
+                action();
+                $(modalId).modal('hide');
+            };
         }
         return {
             'getModalTitle': getModalTitle,
