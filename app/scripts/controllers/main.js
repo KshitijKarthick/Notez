@@ -19,6 +19,7 @@ angular.module('notezApp')
             this.emptySelectedContent();
             this.emptyNotes = true;
             this.modal = modal;
+            this.searchText = "";
             this.db = new $window.Dexie("notez");
             this.db.version(1).stores({
                 notez: 'id,title,content,timestamp',
@@ -118,7 +119,7 @@ angular.module('notezApp')
         };
         var toggleModal = function(){
             $window.jQuery(modalId).modal('toggle');
-        }
+        };
         var getActionButtonTitle = function() {
             return actionButtonTitle;
         };

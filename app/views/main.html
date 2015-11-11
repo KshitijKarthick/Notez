@@ -1,3 +1,6 @@
+<!-- <form class="navbar-form navbar-right" role="search">
+<input type="text" ng-model="searchText" id="main-search-box" class="form-control" placeholder="Search">
+</form> -->
 <div class="container">
   <div class="row well notes-container">
     <div ng-show="notes.emptyNotes">
@@ -5,7 +8,7 @@
         <p class="lead">Hey Human &#128522;</p><p>Seems like you dont have any <strong>Notes</strong> &#x1f61e;</p>
       </blockquote>
     </div>
-    <div class="col-md-3 col-xs-12 col-sm-6 col-md-offset-1 panel panel-default note" ng-repeat="note in notes.notesList | orderObjectBy:'note.timestamp':true track by note.timestamp">
+    <div class="col-md-3 col-xs-12 col-sm-6 col-md-offset-1 panel panel-default note" ng-repeat="note in notes.notesList | orderObjectBy:'note.timestamp':true | filter: notes.searchText track by note.timestamp">
       <div class="panel-body">
         <h4>
           <strong>{{note.title| cut:true:15:' ...'}}</strong>
